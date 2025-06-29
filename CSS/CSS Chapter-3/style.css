@@ -2,7 +2,14 @@ div{
     height: 200px;
     width:500px;
     background-color: pink;
-    border-width: 5px;
+    /* border-width: 5px;
     border-style: solid;
-    border-color: black;
+    border-color: black; */
+    border: 5px solid orange;
+    border-radius:15px
+}
+h1{
+    border-width:5px;
+    border-style: dashed;
+    border-color: purple;
 }
