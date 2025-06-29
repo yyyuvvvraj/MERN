@@ -1,0 +1,18 @@
+#signup{
+    background-color: #b92b27;
+    color:white;
+}
+.upvote{
+    background-color: green;
+    color:aliceblue;;
+}
+
+/*Descendant Selector*/
+.post a{
+    color:purple;
+    background-color: yellow;
+}
+
+nav ul li{
+    color:hotpink;
+}

@@ -7,7 +7,7 @@ h1{
 #searchbtn{
     background-color: black;
     color: white;
-#login,
-#register{
-    background-color: aqua;;
+}
+#login, #register{
+    background-color: aqua;
 }
