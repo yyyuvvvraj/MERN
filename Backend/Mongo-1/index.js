@@ -7,6 +7,7 @@ const Chat=require('./models/chat');
 app.set("views",path.join(__dirname,"/views"));
 app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname,"/public")));
+app.use(express.urlencoded({ extended:true }));
 
 main().then(() =>{
     console.log("MongoDB is connected");
@@ -15,13 +16,6 @@ main().then(() =>{
 async function main(){
     await mongoose.connect('mongodb://127.0.0.1:27017/whatsapp');
 }
-
-//Index Route
-app.get("/chats",async (req,res)=>{
-    let chats = await Chat.find();
-    console.log(chats);
-    res.render("index.ejs",{ chats });
-})
 
 let chat1= new Chat({
     from:"Neha",
@@ -33,6 +27,35 @@ let chat1= new Chat({
 chat1.save().then((res)=>{
     console.log(res);
 });
+
+//Index Route
+app.get("/chats",async (req,res)=>{
+    let chats = await Chat.find();
+    console.log(chats);
+    res.render("index.ejs",{ chats });
+});
+
+//New Route
+app.get("/chats/new",(req,res)=>{
+    res.render("new.ejs");
+});
+
+//Create Route
+app.post("/chats",(req,res)=>{
+    let{ from,to,msg }=req.body;
+    let newChat= new Chat({
+        from:from,
+        to:to,
+        msg:msg,
+        created_at:new Date()
+    });
+    newChat.save().then(res=>{console.log("Chat was saved")}).catch((err)=>{
+        console.log(err);
+    });
+    res.redirect("/chats");
+});
+
+
 
 app.get("/",(req,res) =>{
     res.send("Root is working");
